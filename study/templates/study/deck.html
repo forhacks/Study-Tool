@@ -24,4 +24,7 @@
         </div>
     {% endfor %}
 
+    {% url 'study:dashboard:deck:edit' deck.id as url %}
+    {% bootstrap_button 'Edit Cards' href=url button_class='btn-raised btn-primary' %}
+
 {% endblock %}

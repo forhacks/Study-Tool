@@ -1,0 +1,50 @@
+{% extends 'study/base_user.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %}Edit Deck - Study Tool{% endblock %}
+
+{% block extrahead %}
+    <script src="{% static 'jquery.formset.js' %}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.formset-row').formset({
+                // For inline formsets, be sure to set the prefix, as the default prefix
+                // ('form') isn't correct.
+                // Django appears to generate the prefix from the lowercase plural
+                // name of the related model, with camel-case converted to underscores.
+                prefix: '{{ formset.prefix }}'
+            })
+        })
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    <h1>Edit Deck</h1>
+
+    <form action="{% url 'study:dashboard:deck:edit' deck.id %}" method="post">
+
+        {% csrf_token %}
+
+        {% for form in formset.forms %}
+            <div class="row formset-row">
+                {% for field in form %}
+                    {% if 'id' not in field.name and 'deck' not in field.name and 'DELETE' not in field.name %}
+                        <div class="col-4">
+                            {% bootstrap_field field %}
+                        </div>
+                    {% else %}
+                        {% bootstrap_field field %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}<br><br>
+
+        {{ formset.management_form }}
+
+        {% bootstrap_button 'Save' button_type='submit' button_class='btn-raised btn-primary' %}
+
+    </form>
+
+{% endblock %}

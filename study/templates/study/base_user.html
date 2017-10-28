@@ -18,6 +18,11 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'study/base_user.css' %}"/>
 
+    {% bootstrap_jquery %}
+    {% bootstrap_javascript %}
+
+    {% block extrahead %}{% endblock %}
+
 </head>
 
 <body>
@@ -101,10 +106,6 @@
 
 </div>
 
-{# BOOTSTRAP JAVASCRIPT #}
-
-{% bootstrap_jquery %}
-{% bootstrap_javascript %}
 <script>
     $('body').bootstrapMaterialDesign();
 </script>

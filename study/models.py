@@ -9,3 +9,5 @@ class Deck(models.Model):
 
 class Card(models.Model):
     deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
+    term = models.CharField(max_length=100)
+    definition = models.CharField(max_length=200)

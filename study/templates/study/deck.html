@@ -5,6 +5,23 @@
 
 {% block content %}
 
-    <h1>{{ deck.deck_name }}</h1>
+    <h1 class="display-1">{{ deck.deck_name }}</h1>
+
+    <hr>
+
+    <h1>Cards</h1>
+
+    {% for card in deck.card_set.all %}
+        <div class="card mb-2">
+            <div class="card-body row">
+                <div class="col-md-3">
+                    <p class="mb-0">{{ card.term }}</p>
+                </div>
+                <div class="col-md-9">
+                    <p class="mb-0">{{ card.definition }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 
 {% endblock %}

@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.forms import inlineformset_factory
@@ -118,9 +120,11 @@ def update_deck_view(request, pk):
 
 def test_view(request, pk):
     deck = get_object_or_404(Deck, pk=pk)
+    card = random.choice(deck.card_set.all())
 
     context = {
         'deck': deck,
+        'card': card,
         'user_decks': Deck.objects.filter(owner=request.user)
     }
 

@@ -2,7 +2,7 @@
 {% load bootstrap4 %}
 {% load static %}
 
-{% block title %}Practice - Study Tool{% endblock %}
+{% block title %}Practice - Quill{% endblock %}
 
 {% block extrahead %}
     <link rel="stylesheet" type="text/css" href="{% static 'study/test.css' %}"/>
@@ -13,13 +13,13 @@
     <div class="card">
         <div class="card-body">
 
-            <h2>muffin</h2>
+            <h2>{{ card.term }}</h2>
 
             <hr>
 
-            <h2 id="def">a type of pastry</h2>
+            <h2 id="def">{{ card.definition }}</h2>
 
-            <form action="">
+            <form action="{% url 'study:dashboard:deck:test' deck.id %}" method="post" onsubmit="validate()">
 
                 <div class="form-group">
                     <label for="user-input" class="bmd-label-floating">Type the answer...</label>

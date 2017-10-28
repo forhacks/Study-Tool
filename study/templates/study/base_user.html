@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
     {% bootstrap_css %}
 
-    <link rel="stylesheet" type="text/css" href="{% static 'study/base.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'study/base_user.css' %}"/>
 
 </head>
 
@@ -83,10 +83,27 @@
 
 </nav>
 
-<div class="container">
+<div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-in">
 
-    {% block content %}
-    {% endblock %}
+    <div id="dw-s1" class="bmd-layout-drawer bg-faded">
+        <header>
+            <a class="navbar-brand">Title</a>
+        </header>
+        <nav class="list-group bmd-list-group-sm">
+            <a class="list-group-item">Link 1</a>
+            <a class="list-group-item">Link 2</a>
+            <a class="list-group-item">Link 3</a>
+        </nav>
+    </div>
+
+    <main class="bmd-layout-content">
+        <div class="{% block container-class %}container-fluid{% endblock %}">
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+    </main>
 
 </div>
 

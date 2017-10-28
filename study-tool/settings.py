@@ -120,3 +120,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Django Bootstrap 4
+
+BOOTSTRAP4 = {
+    'css_url': {
+        'href': 'https://unpkg.com/bootstrap-material-design@4.0.0-beta.4/dist/css/bootstrap-material-design.min.css'
+    },
+    'javascript_url': {
+        'url': 'https://unpkg.com/bootstrap-material-design@4.0.0-beta.4/dist/js/bootstrap-material-design.js'
+    }
+}

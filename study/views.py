@@ -2,32 +2,26 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.views import generic
 from django.urls import reverse
 
 
-def index_view(request):
-    return render(request, 'study/index.html')
+class IndexView(generic.TemplateView):
+    template_name = 'study/index.html'
 
 
-def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            user = authenticate(request, username=data['username'], password=data['password'])
+class LoginView(generic.FormView):
+    template_name = 'study/login.html'
+    form_class = AuthenticationForm
 
-            if user is not None:
-                login(request, user)
-                return HttpResponseRedirect(reverse('study:dashboard'))
-    else:
-        form = AuthenticationForm()
+    def form_valid(self, form):
+        data = form.cleaned_data
+        user = authenticate(form.request, username=data['username'], password=data['password'])
 
-    context = {
-        'form': form
-    }
-
-    return render(request, 'study/login.html', context)
+        if user is not None:
+            login(self.request, user)
+            return HttpResponseRedirect(reverse('study:dashboard'))
 
 
-def dashboard_view(request):
-    return render(request, 'study/dashboard.html')
+class DashboardView(generic.TemplateView):
+    template_name = 'study/dashboard.html'

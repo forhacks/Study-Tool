@@ -1,0 +1,18 @@
+{% extends 'study/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+    <h1>Login</h1>
+
+    <form method="post" action="{% url 'study:login' %}">
+
+        {% csrf_token %}
+
+        {% bootstrap_form login_form %}
+
+        {% bootstrap_button 'Login' button_type='submit' button_class='btn-primary' name='login' %}
+
+    </form>
+
+{% endblock %}

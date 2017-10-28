@@ -65,7 +65,7 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarAccountDropdownLink">
-                        <a class="dropdown-item" href="{% url 'study:auth' %}">Logout</a>
+                        <a class="dropdown-item" href="{% url 'study:login' %}">Logout</a>
                     </div>
 
                 </li>
@@ -73,7 +73,7 @@
             {% else %}
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'study:auth' %}">Login</a>
+                    <a class="nav-link" href="{% url 'study:login' %}">Login</a>
                 </li>
 
             {% endif %}

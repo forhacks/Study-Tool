@@ -6,6 +6,6 @@ app_name = 'study'
 
 urlpatterns = [
     url(r'^$', views.index_view, name='index'),
-    url(r'^auth/$', views.auth_view, name='auth'),
+    url(r'^auth/$', views.login_view, name='login'),
     url(r'^dashboard/$', views.dashboard_view, name='dashboard')
 ]

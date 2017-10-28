@@ -9,7 +9,7 @@ def index_view(request):
     return render(request, 'study/index.html')
 
 
-def auth_view(request):
+def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
@@ -26,7 +26,7 @@ def auth_view(request):
         'form': form
     }
 
-    return render(request, 'study/auth.html', context)
+    return render(request, 'study/login.html', context)
 
 
 def dashboard_view(request):

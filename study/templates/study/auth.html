@@ -2,5 +2,15 @@
 {% load bootstrap4 %}
 
 {% block content %}
-    Auth
+
+    <form method="post" action="{% url 'study:auth' %}">
+
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+
+        {% bootstrap_button 'Submit' button_type='submit' button_class='btn-primary' %}
+
+    </form>
+
 {% endblock %}

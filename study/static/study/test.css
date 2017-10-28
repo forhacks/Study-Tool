@@ -1,8 +1,3 @@
 .card-body {
     padding: 100px;
 }
-
-#def {
-    opacity: 0;
-    transition: all 0.3s ease;
-}

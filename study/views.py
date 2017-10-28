@@ -10,6 +10,7 @@ from django.urls import reverse
 
 from .models import Deck, Card
 from .forms import DeckForm
+from . import validate
 
 
 class IndexView(generic.TemplateView):
@@ -119,12 +120,28 @@ def update_deck_view(request, pk):
 
 
 def test_view(request, pk):
+
     deck = get_object_or_404(Deck, pk=pk)
-    card = random.choice(deck.card_set.all())
+
+    display = False
+
+    if request.method == 'POST':
+        card = get_object_or_404(Card, pk=request.POST['card-id'])
+        a = card.definition
+        b = request.POST['user-input']
+
+        if validate.validate(a, b):
+            card = random.choice(deck.card_set.all())
+        else:
+            display = True
+
+    else:
+        card = random.choice(deck.card_set.all())
 
     context = {
         'deck': deck,
         'card': card,
+        'display': display,
         'user_decks': Deck.objects.filter(owner=request.user)
     }
 

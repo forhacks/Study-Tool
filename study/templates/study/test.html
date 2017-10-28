@@ -17,13 +17,22 @@
 
             <hr>
 
-            <h2 id="def">{{ card.definition }}</h2>
+            {% if display == True %}
+                <h2 id="def">{{ card.definition }}</h2>
+                <p class="text-muted">Answer correctly to continue.</p>
+            {% else %}
+                <h2>&nbsp;</h2>
+            {% endif %}
 
             <form action="{% url 'study:dashboard:deck:test' deck.id %}" method="post" onsubmit="validate()">
 
+                {% csrf_token %}
+
+                <input type="hidden" name="card-id" value="{{ card.id }}">
+
                 <div class="form-group">
                     <label for="user-input" class="bmd-label-floating">Type the answer...</label>
-                    <input type="text" class="form-control" id="user-input">
+                    <input type="text" class="form-control" name="user-input" id="user-input">
                 </div>
 
             </form>

@@ -6,6 +6,10 @@ body {
     padding-top: 20px;
 }
 
+.bmd-layout-drawer {
+    display: block;
+}
+
 .navbar-toggler {
     border: 0;
 }

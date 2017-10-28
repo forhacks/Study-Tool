@@ -9,6 +9,7 @@
 
     <meta charset="UTF-8">
 
+    <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}"/>
 
     <title>{% block title %}Study Tool{% endblock %}</title>
 
@@ -21,77 +22,28 @@
 
 <body>
 
-<nav class="navbar navbar-dark bg-primary fixed-top navbar-expand-lg">
-
-    <a class="navbar-brand" href="#">Study Tool</a>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-
-        <span class="navbar-toggler-icon"></span>
-
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-        <ul class="navbar-nav mr-auto">
-            {% if user.is_authenticated %}
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'study:dashboard' %}">Dashboard</a>
-                </li>
-
-            {% else %}
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'study:index' %}">Home</a>
-                </li>
-
-            {% endif %}
-
-        </ul>
-
-        <ul class="navbar-nav ml-auto">
-
-            {% if user.is_authenticated %}
-
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarAccountDropdownLink"
-                       data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        {{ user.first_name }} {{ user.last_name }}
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarAccountDropdownLink">
-                        <a class="dropdown-item" href="{% url 'study:login' %}">Logout</a>
-                    </div>
-
-                </li>
-
-            {% else %}
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'study:login' %}">Login</a>
-                </li>
-
-            {% endif %}
-
-        </ul>
-
-    </div>
-
-</nav>
-
 <div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-in">
 
     <div id="dw-s1" class="bmd-layout-drawer bg-faded">
-        <h4>Decks</h4>
-        <nav class="list-group bmd-list-group-sm">
-            <a class="list-group-item">Link 1</a>
-            <a class="list-group-item">Link 2</a>
-            <a class="list-group-item">Link 3</a>
-        </nav>
+
+        <h6 class="mb-0 ml-4 mt-4">Navigation</h6>
+        <div class="list-group">
+            <a class="list-group-item list-group-item-action" href="{% url 'study:dashboard:index' %}">
+                Dashboard
+            </a>
+            <a class="list-group-item list-group-item-action" href="{% url 'study:dashboard:index' %}">
+                Account
+            </a>
+        </div>
+
+        <h6 class="mb-0 ml-4 mt-4">My Decks</h6>
+        <div class="list-group">
+            {% for deck in user_decks %}
+                <a class="list-group-item list-group-item-action"
+                   href="{% url 'study:dashboard:deck:index' deck.id %}">{{ deck.deck_name }}</a>
+            {% endfor %}
+        </div>
+
     </div>
 
     <main class="bmd-layout-content">
@@ -104,6 +56,41 @@
     </main>
 
 </div>
+
+<nav class="navbar navbar-dark bg-primary fixed-top navbar-expand-lg">
+
+    <a class="navbar-brand" href="{% url 'study:dashboard:index' %}">Study Tool</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item dropdown">
+
+                <a class="nav-link dropdown-toggle" href="#" id="navbarAccountDropdownLink"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    {{ user.first_name }} {{ user.last_name }}
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarAccountDropdownLink">
+                    <a class="dropdown-item" href="{% url 'study:logout' %}">Logout</a>
+                </div>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+</nav>
 
 {# BOOTSTRAP JAVASCRIPT #}
 

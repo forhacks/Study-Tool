@@ -6,3 +6,4 @@ from .models import Deck
 class DeckForm(forms.ModelForm):
     class Meta:
         model = Deck
+        fields = ['deck_name']

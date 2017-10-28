@@ -24,24 +24,68 @@
 
 <div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-in">
 
-    <div id="dw-s1" class="bmd-layout-drawer bg-faded">
+    <header class="bmd-layout-header">
+
+        <nav class="navbar navbar-dark bg-primary fixed-top">
+
+            <a class="navbar-brand" href="{% url 'study:dashboard:index' %}">Study Tool</a>
+
+            <div>
+
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarAccountDropdownLink"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ user.first_name }} {{ user.last_name }}
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarAccountDropdownLink">
+                            <a class="dropdown-item" href="{% url 'study:logout' %}">Logout</a>
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <div class="bmd-layout-drawer bg-faded">
 
         <h6 class="mb-0 ml-4 mt-4">Navigation</h6>
         <div class="list-group">
-            <a class="list-group-item list-group-item-action" href="{% url 'study:dashboard:index' %}">
+            {% url 'study:dashboard:index' as dashboard_url %}
+            <a class="list-group-item list-group-item-action{% if request.path_info == dashboard_url %} active{% endif %}"
+               href="{% url 'study:dashboard:index' %}">
+                <i class="material-icons">dashboard</i>
                 Dashboard
             </a>
             <a class="list-group-item list-group-item-action" href="{% url 'study:dashboard:index' %}">
+                <i class="material-icons">account_circle</i>
                 Account
             </a>
         </div>
 
         <h6 class="mb-0 ml-4 mt-4">My Decks</h6>
         <div class="list-group">
-            {% for deck in user_decks %}
-                <a class="list-group-item list-group-item-action"
-                   href="{% url 'study:dashboard:deck:index' deck.id %}">{{ deck.deck_name }}</a>
+            {% for f_deck in user_decks %}
+                <a class="list-group-item list-group-item-action{% if deck.id == f_deck.id %} active{% endif %}"
+                   href="{% url 'study:dashboard:deck:index' f_deck.id %}">
+                    <i class="material-icons">label</i>
+                    {{ f_deck.deck_name }}
+                </a>
             {% endfor %}
+            {% url 'study:dashboard:new' as new_url %}
+            <a class="list-group-item list-group-item-action{% if request.path_info == new_url %} active{% endif %}"
+               href="{% url 'study:dashboard:new' %}">
+                <i class="material-icons">add</i>
+                New Deck
+            </a>
         </div>
 
     </div>
@@ -56,41 +100,6 @@
     </main>
 
 </div>
-
-<nav class="navbar navbar-dark bg-primary fixed-top navbar-expand-lg">
-
-    <a class="navbar-brand" href="{% url 'study:dashboard:index' %}">Study Tool</a>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-
-        <span class="navbar-toggler-icon"></span>
-
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-        <ul class="navbar-nav ml-auto">
-
-            <li class="nav-item dropdown">
-
-                <a class="nav-link dropdown-toggle" href="#" id="navbarAccountDropdownLink"
-                   data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    {{ user.first_name }} {{ user.last_name }}
-                </a>
-
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarAccountDropdownLink">
-                    <a class="dropdown-item" href="{% url 'study:logout' %}">Logout</a>
-                </div>
-
-            </li>
-
-        </ul>
-
-    </div>
-
-</nav>
 
 {# BOOTSTRAP JAVASCRIPT #}
 

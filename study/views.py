@@ -34,12 +34,7 @@ class SignUpView(generic.FormView):
     def form_valid(self, form):
         form.save()
 
-        data = form.cleaned_data
-        user = authenticate(form.request, username=data['username'], password=data['password'])
-
-        if user is not None:
-            login(self.request, user)
-            return HttpResponseRedirect(reverse('study:dashboard:index'))
+        return HttpResponseRedirect(reverse('study:login'))
 
 
 class LogoutView(generic.RedirectView):

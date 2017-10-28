@@ -14,7 +14,8 @@ urlpatterns = [
         url(r'^new/$', views.CreateDeckView.as_view(), name='new'),
         url(r'^deck/(?P<pk>[0-9]+)/', include([
             url(r'^$', views.DeckView.as_view(), name='index'),
-            url(r'^edit$', views.update_deck_view, name='edit')
+            url(r'^edit/$', views.update_deck_view, name='edit'),
+            url(r'^test/$', views.test_view, name='test')
         ], namespace='deck'))
     ], namespace='dashboard'))
 ]

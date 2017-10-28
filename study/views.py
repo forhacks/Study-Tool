@@ -101,15 +101,15 @@ class UpdateDeckView(generic.UpdateView):
 def update_deck_view(request, pk):
     deck = get_object_or_404(Deck, pk=pk)
 
-    CardInlineFormSet = inlineformset_factory(Deck, Card, fields=('term', 'definition'))
+    card_inline_formset = inlineformset_factory(Deck, Card, fields=('term', 'definition'))
 
     if request.method == "POST":
-        formset = CardInlineFormSet(request.POST, instance=deck)
+        formset = card_inline_formset(request.POST, instance=deck)
         if formset.is_valid():
             formset.save()
             return HttpResponseRedirect(reverse('study:dashboard:deck:index', args=(deck.id,)))
     else:
-        formset = CardInlineFormSet(instance=deck)
+        formset = card_inline_formset(instance=deck)
         print('test')
 
     context = {
@@ -119,3 +119,14 @@ def update_deck_view(request, pk):
     }
 
     return render(request, 'study/edit_deck.html', context)
+
+
+def test_view(request, pk):
+    deck = get_object_or_404(Deck, pk=pk)
+
+    context = {
+        'deck': deck,
+        'user_decks': Deck.objects.filter(owner=request.user)
+    }
+
+    return render(request, 'study/test.html', context)

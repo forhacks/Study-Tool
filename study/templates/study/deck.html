@@ -9,10 +9,15 @@
 
     <hr>
 
+    {% url 'study:dashboard:deck:test' deck.id as test_url %}
+    {% bootstrap_button 'Test' href=test_url button_class='btn-outline-secondary btn-lg' %}
+
+    <hr>
+
     <h1>Cards</h1>
 
     {% for card in deck.card_set.all %}
-        <div class="card mb-2">
+        <div class="card mb-4">
             <div class="card-body row">
                 <div class="col-md-3">
                     <p class="mb-0">{{ card.term }}</p>

@@ -1,0 +1,37 @@
+{% extends 'study/base_user.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %}Practice - Study Tool{% endblock %}
+
+{% block extrahead %}
+    <link rel="stylesheet" type="text/css" href="{% static 'study/test.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-body">
+
+            <h2>muffin</h2>
+
+            <hr>
+
+            <h2 id="def">a type of pastry</h2>
+
+            <form action="">
+
+                <div class="form-group">
+                    <label for="user-input" class="bmd-label-floating">Type the answer...</label>
+                    <input type="text" class="form-control" id="user-input">
+                </div>
+
+            </form>
+
+            <hr>
+
+
+        </div>
+    </div>
+
+{% endblock %}
